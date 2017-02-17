@@ -7,30 +7,29 @@
               <img src="https://o4j806krb.qnssl.com/public/images/cnodejs_light.svg" class="logo-img">
           </header>
         </div> 
-        <menu-slide :show="show" @hideMenuSlide="hideMenuSlide"></menu-slide>
+        <menu-slide :show="leftNavStatus" @hideMenuSlide="hideMenuSlide"></menu-slide>
     </div>
 </template>
 
 <script>
-   
+   import { mapActions, mapState } from 'vuex'
    import MenuSlide from './Menu.vue'
    export default {
       props: {
-         fixed: Boolean,
+         fixed: Boolean
       },
-      data () {
-          return {
-              show : false
-          }
-      },
+      computed: mapState({
+          leftNavStatus: state => state.com.leftNavStatus
+      }),
       methods: {
+        ...mapActions({setNavState: 'setNavState'}),
         // 显示MenuSlide
         showMenuSlide () {
-            this.show = true
+            this.setNavState(true)
         },
         // 隐藏MenuSlide
         hideMenuSlide (){
-            this.show = false
+            this.setNavState(false)
         }
       },
       components: {
@@ -48,7 +47,6 @@
         width:100%;
         top:0;
         z-index:1;
-        max-width: 640px;
     }
     .head-logo{
         height: 43px;

@@ -88,7 +88,7 @@ export default {
 
 <style lang="css">
  .mint-cell {
-    //background-color:#fff;
+    background-color:#fff;
     box-sizing:border-box;
     color:inherit;
     min-height:45px;

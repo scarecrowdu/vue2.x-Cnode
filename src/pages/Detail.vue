@@ -6,14 +6,21 @@
           <i class="head-logo-icon iconfont icon-logo"></i>
       </header>
     </div>
-    <div class="detail-post"  v-if="detail">
+    <div class="loading-dox" v-show="loading">
+       <loading :size="50"></loading>
+    </div>
+    <div class="detail-post" v-show="!loading">
       <div class="detail-post-meta">
           <div class="detail-post-avatar">
+            <router-link :to="{name:'user',params:{loginname:detail.author.loginname}}"  v-if="detail.author">
               <img class="detail-post-avatar-img" v-if="detail.author" :src="detail.author.avatar_url"/>
+            </router-link>
           </div>
           <div class="detail-post-info">
               <div class="detail-post-author-name">
-                <p v-if="detail.author">{{ detail.author.loginname }}</p>
+                <router-link :to="{name:'user',params:{loginname:detail.author.loginname}}"  v-if="detail.author">
+                   <p>{{ detail.author.loginname }}</p>
+                </router-link>
                 <p class="detail-type-item">
                   <span class="detail-type-item-font" v-if="detail.tab === 'good'">#精华#</span>
                   <span class="detail-type-item-font" v-else-if="detail.tab === 'share'">#分享#</span>
@@ -61,8 +68,7 @@
                 </div>
               </div>
             </div>
-
-            <div class="detail-post-comment-null" v-else>
+            <div class="detail-post-comment-null" v-if="detail.replies == ''">
               <img class="imgnull" mode="scaleToFill" src="../assets/icon/null.png">
               <p class="textnull">暂无收录评论 </p>
             </div>
@@ -76,35 +82,51 @@
 </template>
 
 <script>
-    import { mapGetters, mapState } from 'vuex'
+    import Loading from '../components/Loading.vue'
+    import { mapGetters } from 'vuex'
     export default {
-      mounted () {
-          window.scroll(0,0)
-          let id = this.$route.params.id
-          this.$store.dispatch('getDetail', id)
+      components:{
+        Loading
       },
-      computed: {
-        ...mapGetters({
-          detail:'getDetail'
+      beforeRouteEnter(to, from, next) {
+        next((vm) => {
+          vm.detail = {}
+          vm.getDetailData(vm) 
         })
       },
-      
+      // beforeRouteLeave (to, from, next) {
+      //    next(() => {
+      //      this.detail = {}
+      //    })
+      // },
+      mounted () {
+         this.getDetailData(this) 
+      },
+      computed:mapGetters({
+        detail:'getDetail',
+        loading:'loading'
+      }),
       methods: {
-        isEmpty(obj){
-          for(let name in obj){ 
-            return false; 
-          } 
-          return true; 
+        getDetailData (el) {
+          window.scroll(0,0)
+          let id = el.$route.params.id
+          el.$store.dispatch('getDetail', id)
         }
       }
     }
 
 </script>
 
-<style>
-
+<style scape>
+.loading-dox{
+  margin:50px auto;
+  text-align:center;
+}
+.loading-dox div{
+  margin:auto;
+}
 .detail-post-meta{
-  margin-top:43px;
+  margin-top:23px;
   padding: 15px;
   display: flex;
   align-items: center;

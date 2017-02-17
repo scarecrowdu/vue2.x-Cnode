@@ -20,11 +20,13 @@ const actions = {
     getTopicsList ({commit},params) {
         if(state.scroll){
             commit(types.GET_PAGE_NUM)
+            commit(types.COM_LOADING_STATUS,true)
             commit(types.GET_SCORLL_STATUS,false)
             api.TopicsList(`?tab=${state.searchKey.tab}&page=${state.searchKey.page}&limit=20`)
             .then(res =>{
-                 commit(types.GET_TOPICS_LIST,res)
-                 commit(types.GET_SCORLL_STATUS,true)
+                commit(types.COM_LOADING_STATUS,false)
+                commit(types.GET_SCORLL_STATUS,true)
+                commit(types.GET_TOPICS_LIST,res)
             })
         }
     }

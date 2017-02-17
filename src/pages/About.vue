@@ -1,7 +1,5 @@
 <template>
     <div class="about">
-        <cheader></cheader>
-
         <div class="auserinfo">
             <img class="auserinfo-avatar" src="~assets/vincentSea.jpg">
             <p class="auserinfo-nickname">vincentSea</p>
@@ -33,22 +31,16 @@
 </template>
 
 <script>
-
-   import Cheader from '../components/Cheader.vue'
    export default {
-     components:{
-       Cheader
-     }
+     
    }
-   
-
 </script>
 
 <style lang="css" scoped>
 
 .about{
   height: 100%;
-  height:100vh;
+  margin-top:43px;
 }
 .top-box{
   position:static;

@@ -3,10 +3,12 @@ import * as types from '../types'
 
 
 const state = {
-    // 登录状态
+    // 用户登录状态
     loginStatus: JSON.parse(localStorage.getItem('loginStatus')) || false,
-    // 登录信息
-    userInfo : JSON.parse(localStorage.getItem('userInfo')) || {}
+    // 用户登录信息
+    userInfo : JSON.parse(localStorage.getItem('userInfo')) || {},
+    // 用户数据信息
+    userData: []
 }
 
 const actions = {
@@ -31,23 +33,37 @@ const actions = {
         localStorage.removeItem('userInfo')
         commit(types.SET_LOGIN_STATUS,false)
         commit(types.SET_USER_INFO,{})
+    },
+    
+    /**
+     * 请求用信息
+     * @param {any} {commit}
+     * @param {any} name
+     */
+    getUserData ({commit},name) {
+        commit(types.COM_LOADING_STATUS,true)
+        api.UserInfo(name)
+        .then(res =>{
+            commit(types.COM_LOADING_STATUS,false)
+            commit(types.GET_USER_DATA,res.data)
+        })
     }
 }
 
 const getters = {
-    // setUserInfo: state => state.userInfo
+    getUserData: state => state.userData
 }
 
 const mutations = {
-
     [types.SET_USER_INFO] (state,res) {
         state.userInfo = res
     },
-    
     [types.SET_LOGIN_STATUS] (state,status) {
         state.loginStatus = status
+    },
+    [types.GET_USER_DATA] (state,res) {
+        state.userData = res
     }
-
 }
 
 export default {

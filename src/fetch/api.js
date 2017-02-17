@@ -51,8 +51,17 @@ export default {
      * @param {any} id 参数id
      * @returns
      */
-    TopicsDetail(id){
+    TopicsDetail(id) {
         return fetch(`/topic/${id}`)
+    },
+    
+    /**
+     * 获取用户信息
+     * @param {any} name 用户名
+     * @returns
+     */
+    UserInfo (name) {
+        return fetch(`/user/${name}`)
     }
 
 }

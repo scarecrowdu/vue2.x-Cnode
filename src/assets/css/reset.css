@@ -373,6 +373,25 @@ clear:both;
 *zoom:1;
 }
 
-
-
-/*@import "//at.alicdn.com/t/font_gjp4n86tdqoj38fr.css"*/
+.nowrap{
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.nowrap-flex{
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    -webkit-box-flex: 1;
+    height: inherit;
+}
+.nowrap-multi{
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}

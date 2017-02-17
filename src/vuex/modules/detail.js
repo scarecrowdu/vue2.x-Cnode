@@ -14,9 +14,12 @@ const actions = {
      * @param {any} id   参数id
      */
     getDetail ({commit},id) {
+       commit(types.COM_LOADING_STATUS,true)
        api.TopicsDetail(id)
        .then(res => {
+           commit(types.COM_LOADING_STATUS,false)
            commit(types.GET_TOPICS_DETAIL,res)
+           
        })
     }
 }

@@ -45,10 +45,14 @@
 
 <style>
 .login{
-  overflow: hidden;
-  height: 100%;
-  height:100vh;
-  background: #444;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    min-height: calc(100vh);
+    /* position: absolute; */
+    /* top:0; */
+    /* let:0; */
+    background: #444;
 }
 
 .login-item{

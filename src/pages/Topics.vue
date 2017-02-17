@@ -7,8 +7,8 @@
         <li v-for="(item, index) in itemTab" class="nav-bar-item" :class="{'nav-bar-active':initIndex === index}" v-on:click="changeTab(index)">{{item.title}}</li>
       </ul>
     </nav>
-  
-    <section class="scroll-posts-list">
+
+    <section class="scroll-posts-list" v-if="topicsList">     
         <div class="posts-list" v-for="(item,index) in topicsList">
          <router-link :to="{name:'detail',params:{id:item.id}}">
             <div class="posts-list-info clearfix">
@@ -45,16 +45,25 @@
          </router-link>
         </div>
     </section>
+    <div class="loading-box" v-show="loading">
+       <loading></loading>
+    </div>
   </div>
 </template>
 
 <script>
+  import Loading from '../components/Loading.vue'
   import Cheader from '../components/Cheader.vue'
   import { mapGetters, mapState } from 'vuex'
   export default {
     components: {
-      Cheader
+      Cheader,
+      Loading
     },
+    beforeRouteLeave(to, from, next) {
+			window.removeEventListener("scroll", this.scrollArtlist, false)
+			next()
+		},
     created () {
       if(this.topicsList.length == 0){
 				this.$store.dispatch('getTopicsList')
@@ -65,11 +74,12 @@
     },
     computed: {
         ...mapGetters({
-          topicsList:'getTopicsList'
+          topicsList:'getTopicsList',
+          loading: 'loading'
         }),
         ...mapState({
           initIndex: state => state.com.initIndex,
-          itemTab:state => state.com.itemTab
+          itemTab:state => state.com.itemTab,
         })
     },
     methods: {
@@ -94,7 +104,13 @@
 
 
 <style lang='css'>
-
+.loading-box{
+  margin:15px auto;
+  text-align:center;
+}
+.loading-box div{
+  margin:auto;
+}
 .topics{
   background:#fff;
 }

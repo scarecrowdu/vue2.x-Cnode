@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-     <cheader fixed :show="show"></cheader>
+     <cheader v-if="headerShow" fixed></cheader>
      <!-- <transition name="fade" mode="out-in">-->
      <keep-alive>    
           <router-view></router-view>
@@ -11,23 +11,42 @@
 
 <script>
 
-import Cheader from './components/Cheader.vue'
-export default {
-  name: 'App',
-  data () {
-    return {
-      show: true  
+  import Cheader from './components/Cheader.vue'
+  import { mapActions } from 'vuex'
+  
+  export default {
+    name: 'App',
+    data () {
+      return {
+        headerShow: true
+      }
+    },
+    created () {
+       if(this.$route.name == "login"){ this.headerShow = false}
+    },
+    components: {
+      Cheader
+    },
+    watch: {
+      // 如果路由有变化，会再次执行该方法
+      '$route': 'hideMenuSlide'
+    },
+    methods: {
+      ...mapActions({setNavState: 'setNavState'}),
+      // 隐藏MenuSlide
+      hideMenuSlide (){
+          this.setNavState(false)
+      }
     }
-  },
-  components: {
-    Cheader
   }
-}
+
 </script>
 
 <style lang="scss">
 .app {
   overflow: hidden;
+  height: 100%;
+  min-height: calc(100vh);
   background:#fff;
 }
 
