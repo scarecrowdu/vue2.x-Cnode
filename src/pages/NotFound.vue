@@ -5,12 +5,12 @@
   </div>
 </template>
 
-<style>
+<style lang="css" scoped>
    .error{
       width: 200px;
       height: 200px;
       margin: 120px auto 10px auto;
-      background: url(/img/404.5ec1b9b.png) no-repeat;
+      background: url(../assets/error.png) no-repeat;
       background-size: 100%;
       background-position: -10px center;
    }

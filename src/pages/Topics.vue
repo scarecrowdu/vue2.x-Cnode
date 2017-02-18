@@ -60,6 +60,11 @@
       Cheader,
       Loading
     },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        window.addEventListener('scroll', vm.scrollArtlist, false)
+      })
+    },
     beforeRouteLeave(to, from, next) {
 			window.removeEventListener("scroll", this.scrollArtlist, false)
 			next()
@@ -69,9 +74,9 @@
 				this.$store.dispatch('getTopicsList')
 			}
     },
-    mounted () {
-      window.addEventListener('scroll', this.scrollArtlist, false)
-    },
+    // mounted () {
+    //   window.addEventListener('scroll', this.scrollArtlist, false)
+    // },
     computed: {
         ...mapGetters({
           topicsList:'getTopicsList',
@@ -103,7 +108,7 @@
 </script>
 
 
-<style lang='css'>
+<style lang="css" scoped>
 .loading-box{
   margin:15px auto;
   text-align:center;

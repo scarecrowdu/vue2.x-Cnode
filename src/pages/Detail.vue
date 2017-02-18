@@ -94,13 +94,8 @@
           vm.getDetailData(vm) 
         })
       },
-      // beforeRouteLeave (to, from, next) {
-      //    next(() => {
-      //      this.detail = {}
-      //    })
-      // },
       mounted () {
-         this.getDetailData(this) 
+        //  this.getDetailData(this) 
       },
       computed:mapGetters({
         detail:'getDetail',
@@ -117,7 +112,7 @@
 
 </script>
 
-<style scape>
+<style lang="css" scoped>
 .loading-dox{
   margin:50px auto;
   text-align:center;

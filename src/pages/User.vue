@@ -81,7 +81,6 @@
 </script>
 
 <style lang="css" scoped>
-
 .user{
   height: 100%;
   margin-top:43px;

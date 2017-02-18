@@ -14,7 +14,7 @@
                         </router-link>
                     </li>
                     <li >
-                        <router-link to="path">
+                        <router-link to="/post">
                             <i class="iconfont icon-fabu"></i>
                             <span>发布</span>
                         </router-link>

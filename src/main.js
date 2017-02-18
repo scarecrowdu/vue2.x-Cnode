@@ -2,7 +2,7 @@ require("./assets/css/reset.css")
 
 import Vue from 'vue'
 import App from './App'
-import router from './routers'
+import router from './router/routers'
 import store from './vuex/store'
 import * as filters from './filter'
 

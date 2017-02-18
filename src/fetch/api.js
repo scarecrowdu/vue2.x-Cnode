@@ -62,6 +62,15 @@ export default {
      */
     UserInfo (name) {
         return fetch(`/user/${name}`)
+    },
+    
+    /**
+     * 获取已读和未读消息
+     * @param {any} accesstoken 
+     * @returns
+     */
+    Messages (accesstoken ) {
+        return fetch(`/messages?mdrender=true&accesstoken=${accesstoken}`)
     }
 
 }

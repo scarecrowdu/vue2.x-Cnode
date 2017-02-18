@@ -26,7 +26,7 @@
    }
 </script>
 
-<style scoped>
+<style lang="css" scoped>
    .me{
         position: absolute;
         top: 0;

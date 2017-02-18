@@ -43,7 +43,7 @@
 
 </script>
 
-<style>
+<style lang="css" scoped>
 .login{
     overflow: hidden;
     width: 100%;
