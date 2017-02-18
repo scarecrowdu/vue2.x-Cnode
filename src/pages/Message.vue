@@ -32,7 +32,9 @@
                 </li>
             </ul>
 
-            <div v-if="list.has_read_messages == ''">暂无已读消息</div>
+            <div  class="msg-null"  v-if="list.has_read_messages == ''">
+                 <img src="~assets/null.png">
+            </div>
         </div>
 
         <div class="msg-box" v-show="tabIndex == 1">
@@ -61,10 +63,10 @@
                 </li>
             </ul>
 
-            <div  v-if="list.hasnot_read_messages == ''">暂无未读消息</div>
+            <div class="msg-null" v-if="list.hasnot_read_messages == ''">
+               <img src="~assets/null.png">
+            </div>
         </div>
-        
-
     </div>
 </template>
 
@@ -179,4 +181,11 @@
     width:100%;
 }
 
+.msg-null{
+    text-align:center;
+    margin-top:40px;
+}
+.msg-null img{
+    width:150px;
+}
 </style>

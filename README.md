@@ -1,5 +1,62 @@
 # vue2.x-cnode
 
+### 关于项目
+
+vue2.x Cnode社区是基于vue、vue-router、vuex、axios、es6开发，使用webpack构建工具编译打包项目
+
+如果此开源项目对大家学习vue的全家桶有帮助，请给我一个satr,因为你的satr让我觉得这个开源有了价值！
+
+### 下载 && 启动
+```bash
+   <!--克隆项目-->
+   $ git clone https://github.com/vincentSea/vue2.x-Cnode.git
+
+   <!--安装依赖-->
+   $ npm install
+
+   <!--启动开发环境-->
+   $ npm run dev
+
+   <!--打包项目-->
+   $ npm run build
+```
+
+### 项目目录
+```bash
+│  .babelrc
+│  .gitignore
+│  index.html
+│  index.tpl
+│  package.json
+│  README.md
+│  
+├─build
+│      
+├─src
+│  │  App.vue
+│  │  filter.js
+│  │  main.js
+│  │  
+│  ├─assets
+       
+│  ├─components
+│  │      
+│  ├─fetch
+│  │      
+│  ├─pages
+│  │      
+│  ├─router
+│  │      
+│  └─vuex
+│              
+└─static   
+```
+
+
+
+
+### webpack 配置
+本项目是参考vue-cli快速构建项目，自己搭建项目。后续会改成webpack2.x的版本
 
 ### 安装babel
 
