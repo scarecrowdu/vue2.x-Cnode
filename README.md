@@ -4,21 +4,22 @@
 
 vue2.x Cnode社区是基于vue、vue-router、vuex、axios、es6开发，使用webpack构建工具编译打包项目
 
-如果此开源项目对大家学习vue的全家桶有帮助，请给我一个satr,因为你的satr让我觉得这个开源有了价值！
+如果此开源项目对大家学习vue的全家桶有帮助，请给我一个star,因为你的star让我觉得这个开源有了价值！
+
+### vue1.x 项目
+基于vue1.x已上线项目
+
 
 ### 下载 && 启动
 ```bash
-   <!--克隆项目-->
-   $ git clone https://github.com/vincentSea/vue2.x-Cnode.git
-
-   <!--安装依赖-->
-   $ npm install
-
-   <!--启动开发环境-->
-   $ npm run dev
-
-   <!--打包项目-->
-   $ npm run build
+<!--克隆项目-->
+git clone https://github.com/vincentSea/vue2.x-Cnode.git
+<!--安装依赖-->
+npm install
+<!--启动开发环境-->
+npm run dev
+<!--打包项目-->
+npm run build
 ```
 
 ### 项目目录

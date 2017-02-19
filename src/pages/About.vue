@@ -8,7 +8,7 @@
         <div class="about-box">
             <div class="about-item">
                 <p class="about-item-title">关于项目</p>
-                <p class="about-item-content">vue2.x Cnode社区是基于vue、vue-router、vuex、axios、es6开发，使用webpack构建工具编译打包项目（如果此开源项目对大家学习vue的全家桶有帮助，请给我一个satr,因为你的satr让我觉得这个开源有了价值！）</p>
+                <p class="about-item-content">vue2.x Cnode社区是基于vue、vue-router、vuex、axios、es6开发，使用webpack构建工具编译打包项目（如果此开源项目对大家学习vue的全家桶有帮助，请给我一个star,因为你的star让我觉得这个开源有了价值！）</p>
             </div>
             <div class="about-item">
                 <p class="about-item-title">源码地址</p>
