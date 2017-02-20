@@ -64,13 +64,23 @@ export default {
         return fetch(`/user/${name}`)
     },
     
-    /**
+    /**topics 
      * 获取已读和未读消息
      * @param {any} accesstoken 
      * @returns
      */
     Messages (accesstoken ) {
         return fetch(`/messages?mdrender=true&accesstoken=${accesstoken}`)
+    },
+    
+    
+    /**
+     * 新建主题
+     * @param {any} form
+     * @returns
+     */
+    Post (form) {
+        return fetch(`/topics?${form}`,'post')
     }
 
 }

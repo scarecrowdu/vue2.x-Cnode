@@ -15,6 +15,7 @@
 <script>
    import { mapActions } from 'vuex'
    import api from '../fetch/api'
+   import tool from '../util/tool'
    export default {
      data () {
        return {
@@ -25,6 +26,9 @@
        ...mapActions({ setUserInfo: 'setUserInfo' }),
        // 用户登录  
        isLogin () {
+         if (!this.accesstoken) {
+            return tool.toast('Token不能为空')
+         }
          api.Login(this.accesstoken)
          .then(res => {
             if(res.success){

@@ -1,11 +1,11 @@
 <template>
   <div class="app">
-     <cheader v-if="headerShow" fixed></cheader>
-     <!-- <transition name="fade" mode="out-in">-->
+     <cheader v-if="headerShow" fixed :icon="iconType"></cheader>
+     <transition name="fade" mode="out-in">
      <keep-alive>    
           <router-view></router-view>
      </keep-alive>
-    <!--  </transition> -->
+    </transition>
   </div>
 </template>
 
@@ -18,11 +18,13 @@
     name: 'App',
     data () {
       return {
+        iconType: true,
         headerShow: true
       }
     },
     created () {
        if(this.$route.name == "login"){ this.headerShow = false}
+       if(this.$route.name == "detail"){ this.iconType = false}
     },
     components: {
       Cheader
@@ -51,14 +53,14 @@
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s ease;
+  transition: opacity .2s ease;
 }
 .fade-enter, .fade-leave-active {
   opacity: 0
 }
 .child-view {
   position: absolute;
-  transition: all .5s cubic-bezier(.55,0,.1,1);
+  transition: all .2s cubic-bezier(.55,0,.1,1);
 }
 .slide-left-enter, .slide-right-leave-active {
   opacity: 0;

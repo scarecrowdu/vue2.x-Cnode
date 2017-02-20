@@ -93,7 +93,8 @@ router.beforeEach((to, from, next) => {
     var { auth = false } = to.meta
     var isLogin = Boolean(localStorage.getItem("loginStatus"))  //true用户已登录， false用户未登录
     
-    to.path == '/login' ? router.app.headerShow = false :  router.app.headerShow = true
+    to.name == 'login' ? router.app.headerShow = false :  router.app.headerShow = true
+    to.name == 'detail' ? router.app.iconType = false :  router.app.iconType = true
 
     if (auth && !isLogin && to.path !== '/login') {
         return next({ path: '/login' })
@@ -101,5 +102,10 @@ router.beforeEach((to, from, next) => {
 
     next()
 })
+
+
+// router.afterEach((to, from, next) => {
+// })
+
 
 export default router;

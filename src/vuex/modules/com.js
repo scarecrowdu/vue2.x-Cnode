@@ -1,6 +1,5 @@
 import * as types from '../types'
 
-
 /**
  * App通用配置
  */

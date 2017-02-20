@@ -2,8 +2,8 @@
     <div class="header">
         <div class="head-box" :class="{ 'is-fixed': fixed }">
           <header class="head-logo clearfix">
-              <i class="head-logo-menu iconfont icon-fenlei1" @click="showMenuSlide"></i>
-              <!-- <i class="head-logo-icon iconfont icon-logo"></i> -->
+              <i class="head-logo-menu iconfont icon-fenlei1" v-if="icon"  @click="showMenuSlide"></i> 
+              <i class="head-logo-back iconfont icon-fanhui"  v-if="!icon" @click="goHistory"></i> 
               <img src="https://o4j806krb.qnssl.com/public/images/cnodejs_light.svg" class="logo-img">
           </header>
         </div> 
@@ -16,20 +16,26 @@
    import MenuSlide from './Menu.vue'
    export default {
       props: {
-         fixed: Boolean
+         fixed: Boolean,
+         icon:Boolean
       },
       computed: mapState({
           leftNavStatus: state => state.com.leftNavStatus
       }),
       methods: {
         ...mapActions({setNavState: 'setNavState'}),
+        
         // 显示MenuSlide
         showMenuSlide () {
             this.setNavState(true)
         },
         // 隐藏MenuSlide
-        hideMenuSlide (){
+        hideMenuSlide () {
             this.setNavState(false)
+        },
+        // 返回上一页
+        goHistory () {
+            this.$router.go(-1)
         }
       },
       components: {
@@ -59,7 +65,8 @@
         font-size:28px;
         color: #80bd01;
     }
-    .head-logo .head-logo-menu{
+    .head-logo .head-logo-menu,
+    .head-logo-back{
         position: absolute;
         top: 0;
         left: 20px;
@@ -70,4 +77,5 @@
         width:120px;
         vertical-align: middle;
     }
+
 </style>
