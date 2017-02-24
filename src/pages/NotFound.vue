@@ -1,7 +1,7 @@
 <template>
   <div class="notfound">
-      <div class="error"></div>
-      <div class="etext">页面不存在！</div>
+    <div class="error"></div>
+    <div class="etext">页面不存在！</div>
   </div>
 </template>
 

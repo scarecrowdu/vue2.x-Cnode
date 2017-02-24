@@ -1,52 +1,52 @@
 <template>
   <div class="topics">
-   
 
-   <nav class="nav-box clearfix">
+
+    <nav class="nav-box clearfix">
       <ul class="nav-bar">
         <li v-for="(item, index) in itemTab" class="nav-bar-item" :class="{'nav-bar-active':initIndex === index}" v-on:click="changeTab(index)">{{item.title}}</li>
       </ul>
     </nav>
 
-    <section class="scroll-posts-list" v-if="topicsList">     
-        <div class="posts-list" v-for="(item,index) in topicsList">
-         <router-link :to="{name:'detail',params:{id:item.id}}">
-            <div class="posts-list-info clearfix">
-                <img class="userimg" :src="item.author.avatar_url" />
-                <div class="item-box">
-                  <div class="userinfo">
-                    <span class="username">{{item.author.loginname}}</span>
-                    <span class="time">{{item.last_reply_at | formatDate}}</span>
-                  </div>
-                  <div class="posts-title">
-                    <div class="posts-tag hot" v-if="item.top === true">置顶</div>
-                    <div class="posts-tag" v-else-if="item.good === true">精华</div> 
-                    <span>{{item.title}}</span>
-                  </div>
-                </div>
+    <section class="scroll-posts-list" v-if="topicsList">
+      <div class="posts-list" v-for="(item,index) in topicsList">
+        <router-link :to="{name:'detail',params:{id:item.id}}">
+          <div class="posts-list-info clearfix">
+            <img class="userimg" :src="item.author.avatar_url" />
+            <div class="item-box">
+              <div class="userinfo">
+                <span class="username">{{item.author.loginname}}</span>
+                <span class="time">{{item.last_reply_at | formatDate}}</span>
+              </div>
+              <div class="posts-title">
+                <div class="posts-tag hot" v-if="item.top === true">置顶</div>
+                <div class="posts-tag" v-else-if="item.good === true">精华</div>
+                <span>{{item.title}}</span>
+              </div>
             </div>
-            <div class="bar-info clearfix">
-                <div class="bar-info-item">
-                  <i class="bar-info-item-icon iconfont icon-tubiao"></i>
-                  <p class="bar-info-item-number">{{item.reply_count}}</p>
-                </div>
-                <div class="bar-info-item">
-                  <i class="bar-info-item-icon iconfont icon-yuedu2"></i>
-                  <p class="bar-info-item-number">{{item.visit_count}}</p>
-                </div>
-                <div class="bar-info-item2">
-                  <i class="bar-info-item-icon iconfont icon-biaoqian"></i>
-                  <p class="bar-info-item-number" v-if="item.tab === 'good'">精华</p>
-                  <p class="bar-info-item-number" v-else-if="item.tab === 'share'">分享</p>
-                  <p class="bar-info-item-number" v-else-if="item.tab === 'ask'">问答</p>
-                  <p class="bar-info-item-number" v-else-if="item.tab === 'job'">招聘</p>
-                </div>
+          </div>
+          <div class="bar-info clearfix">
+            <div class="bar-info-item">
+              <i class="bar-info-item-icon iconfont icon-tubiao"></i>
+              <p class="bar-info-item-number">{{item.reply_count}}</p>
             </div>
-         </router-link>
-        </div>
+            <div class="bar-info-item">
+              <i class="bar-info-item-icon iconfont icon-yuedu2"></i>
+              <p class="bar-info-item-number">{{item.visit_count}}</p>
+            </div>
+            <div class="bar-info-item2">
+              <i class="bar-info-item-icon iconfont icon-biaoqian"></i>
+              <p class="bar-info-item-number" v-if="item.tab === 'good'">精华</p>
+              <p class="bar-info-item-number" v-else-if="item.tab === 'share'">分享</p>
+              <p class="bar-info-item-number" v-else-if="item.tab === 'ask'">问答</p>
+              <p class="bar-info-item-number" v-else-if="item.tab === 'job'">招聘</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
     </section>
     <div class="loading-box" v-show="loading">
-       <loading></loading>
+      <loading></loading>
     </div>
   </div>
 </template>
@@ -66,43 +66,43 @@
       })
     },
     beforeRouteLeave(to, from, next) {
-			window.removeEventListener("scroll", this.scrollArtlist, false)
-			next()
-		},
-    created () {
-      if(this.topicsList.length == 0){
-				this.$store.dispatch('getTopicsList')
-			}
+      window.removeEventListener("scroll", this.scrollArtlist, false)
+      next()
+    },
+    created() {
+      if (this.topicsList.length == 0) {
+        this.$store.dispatch('getTopicsList')
+      }
     },
     // mounted () {
     //   window.addEventListener('scroll', this.scrollArtlist, false)
     // },
     computed: {
-        ...mapGetters({
-          topicsList:'getTopicsList',
-          loading: 'loading'
-        }),
-        ...mapState({
-          initIndex: state => state.com.initIndex,
-          itemTab:state => state.com.itemTab,
-        })
+      ...mapGetters({
+        topicsList: 'getTopicsList',
+        loading: 'loading'
+      }),
+      ...mapState({
+        initIndex: state => state.com.initIndex,
+        itemTab: state => state.com.itemTab,
+      })
     },
     methods: {
       // 标签tab切换方法
-			changeTab (index) {
-        window.scroll(0,0)
+      changeTab(index) {
+        window.scroll(0, 0)
         this.topicsList = []
-        this.$store.commit('COM_INIT_INDEX',index)
-        this.$store.commit('GET_SEARCH_KEY',{page:0, tab: this.itemTab[index].type})
-				this.$store.dispatch('getTopicsList')
-			},
+        this.$store.commit('COM_INIT_INDEX', index)
+        this.$store.commit('GET_SEARCH_KEY', { page: 0, tab: this.itemTab[index].type })
+        this.$store.dispatch('getTopicsList')
+      },
       // 超过滚动获取数据方法
-			scrollArtlist () {
-					let totalheight = parseFloat(window.innerHeight) + parseFloat(window.scrollY);
-          if (document.body.clientHeight <= totalheight + 200) {
-              this.$store.dispatch('getTopicsList')
-          }
-			}
+      scrollArtlist() {
+        let totalheight = parseFloat(window.innerHeight) + parseFloat(window.scrollY);
+        if (document.body.clientHeight <= totalheight + 200) {
+          this.$store.dispatch('getTopicsList')
+        }
+      }
     }
   }
 </script>

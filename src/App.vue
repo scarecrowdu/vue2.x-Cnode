@@ -1,10 +1,10 @@
 <template>
   <div class="app">
-     <cheader v-if="headerShow" fixed :icon="iconType"></cheader>
-     <transition name="fade" mode="out-in">
-     <keep-alive>    
-          <router-view></router-view>
-     </keep-alive>
+    <cheader v-if="headerShow" fixed :icon="iconType"></cheader>
+    <transition name="fade" mode="out-in">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </transition>
   </div>
 </template>
@@ -13,18 +13,18 @@
 
   import Cheader from './components/Cheader.vue'
   import { mapActions } from 'vuex'
-  
+
   export default {
     name: 'App',
-    data () {
+    data() {
       return {
         iconType: true,
         headerShow: true
       }
     },
-    created () {
-       if(this.$route.name == "login"){ this.headerShow = false}
-       if(this.$route.name == "detail"){ this.iconType = false}
+    created() {
+      if (this.$route.name == "login") { this.headerShow = false }
+      if (this.$route.name == "detail") { this.iconType = false }
     },
     components: {
       Cheader
@@ -34,10 +34,10 @@
       '$route': 'hideMenuSlide'
     },
     methods: {
-      ...mapActions({setNavState: 'setNavState'}),
+      ...mapActions({ setNavState: 'setNavState' }),
       // 隐藏MenuSlide
-      hideMenuSlide (){
-          this.setNavState(false)
+      hideMenuSlide() {
+        this.setNavState(false)
       }
     }
   }

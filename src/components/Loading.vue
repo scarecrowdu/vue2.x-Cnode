@@ -6,7 +6,7 @@
     'height': spinnerSize,
     'width': spinnerSize
     }">
-  </div>
+    </div>
 </template>
 
 <script>

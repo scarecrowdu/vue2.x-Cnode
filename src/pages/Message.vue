@@ -5,7 +5,7 @@
             <li :class="{on: tabIndex == 0}" @click="tabIndex = 0">已读消息</li>
             <li :class="{on: tabIndex == 1}" @click="tabIndex = 1">未读消息</li>
         </ul>
-        
+
         <div class="msg-box" v-show="tabIndex == 0">
             <ul class="list" v-if="list.has_read_messages">
                 <li v-for="(item, $index) in list.has_read_messages">
@@ -20,7 +20,7 @@
                             在话题
                             <router-link :to="'/detail/' + item.topic.id">{{ item.topic.title }}</router-link> 中 @了你
                         </div>
-                        <div class="topic"  v-if="item.type == 'reply'">
+                        <div class="topic" v-if="item.type == 'reply'">
                             回复你了的话题
                             <router-link :to="'/detail/' + item.topic.id">{{ item.topic.title }}</router-link>
                         </div>
@@ -32,8 +32,8 @@
                 </li>
             </ul>
 
-            <div  class="msg-null"  v-if="list.has_read_messages == ''">
-                 <img src="~assets/null.png">
+            <div class="msg-null" v-if="list.has_read_messages == ''">
+                <img src="~assets/null.png">
             </div>
         </div>
 
@@ -51,7 +51,7 @@
                             在话题
                             <router-link :to="'/detail/' + item.topic.id">{{ item.topic.title }}</router-link> 中 @了你
                         </div>
-                        <div class="topic"  v-if="item.type == 'reply'">
+                        <div class="topic" v-if="item.type == 'reply'">
                             回复你了的话题
                             <router-link :to="'/detail/' + item.topic.id">{{ item.topic.title }}</router-link>
                         </div>
@@ -64,31 +64,31 @@
             </ul>
 
             <div class="msg-null" v-if="list.hasnot_read_messages == ''">
-               <img src="~assets/null.png">
+                <img src="~assets/null.png">
             </div>
         </div>
     </div>
 </template>
 
 <script>
-   
-   import { mapGetters } from 'vuex'
-   export default {
-       data () {
-           return {
-               tabIndex: 0
-           }
-       },
-       beforeRouteEnter(to, from, next){
-           next(vm =>{
-              vm.$store.dispatch('getMessageInfo')
-           })
-       },
-       computed: mapGetters({list:'getMessageInfo'}),
-       methods: {
-           
-       }
-   }
+
+    import { mapGetters } from 'vuex'
+    export default {
+        data() {
+            return {
+                tabIndex: 0
+            }
+        },
+        beforeRouteEnter(to, from, next) {
+            next(vm => {
+                vm.$store.dispatch('getMessageInfo')
+            })
+        },
+        computed: mapGetters({ list: 'getMessageInfo' }),
+        methods: {
+
+        }
+    }
 
 </script>
 

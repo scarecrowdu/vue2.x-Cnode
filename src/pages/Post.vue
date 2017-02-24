@@ -3,8 +3,8 @@
         <div class="title">
             <label class="iconfont icon-biaoti1"></label>标题
             <input type="text" placeholder="请输入标题" v-model="form.title">
-         </div>
-         <div class="select">
+        </div>
+        <div class="select">
             <label class="iconfont icon-fenlei"></label>分类
             <select v-model="form.tab">
                 <option value="">请选择</option>
@@ -23,48 +23,48 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  import api from '../fetch/api'
-  import tool from '../util/tool'
-  export default {
-      data () {
-        return {
-            form: {
-                topic_id: '', //主题id
-                accesstoken : '', // 用户的 accessToken
-                title: '', //标题
-                tab: '', //发表的板块
-                content: '', //发表的内容
+    import { mapState } from 'vuex'
+    import api from '../fetch/api'
+    import tool from '../util/tool'
+    export default {
+        data() {
+            return {
+                form: {
+                    topic_id: '', //主题id
+                    accesstoken: '', // 用户的 accessToken
+                    title: '', //标题
+                    tab: '', //发表的板块
+                    content: '', //发表的内容
+                }
+            }
+        },
+        computed: mapState({ accesstoken: state => state.user.userInfo.accesstoken }),
+        methods: {
+            submit() {
+                if (!this.accesstoken) return this.$router.push({ path: '/login' })
+                this.form.accesstoken = this.accesstoken
+
+                if (!this.form.title) {
+                    return tool.toast('标题不能为空')
+                } else if (!this.form.tab) {
+                    return tool.toast('选项不能为空')
+                } else if (!this.form.content) {
+                    return tool.toast('内容不能为空')
+                }
+                let params = `topic_id=""&accesstoken=${this.form.accesstoken}&title=${this.form.title}&tab=${this.form.tab}&content=${this.form.content}`
+                api.Post(`accesstoken=${this.form.accesstoken}&title=${this.form.title}&tab=${this.form.tab}&content=${this.form.content}topic_id=''`)
+                    .then(res => {
+                        if (res.success) {
+                            this.$router.push({ path: `/topic/${res.topic_id}` })
+                        } else {
+                            tool.toast(res.error_msg)
+                        }
+                    })
+
             }
         }
-      },
-      computed:mapState({accesstoken: state => state.user.userInfo.accesstoken }),
-      methods: {
-          submit (){
-             if (!this.accesstoken) return this.$router.push({ path: '/login' })
-             this.form.accesstoken = this.accesstoken
 
-             if (!this.form.title) {
-                return tool.toast('标题不能为空')
-             } else if (!this.form.tab) {
-                return tool.toast('选项不能为空')
-             } else if (!this.form.content) {
-                return tool.toast('内容不能为空')
-             }
-             let params = `topic_id=""&accesstoken=${this.form.accesstoken}&title=${this.form.title}&tab=${this.form.tab}&content=${this.form.content}`
-             api.Post(`accesstoken=${this.form.accesstoken}&title=${this.form.title}&tab=${this.form.tab}&content=${this.form.content}topic_id=''`)
-             .then(res=>{
-                if (res.success) {
-                    this.$router.push({ path: `/topic/${res.topic_id}` })
-                } else {
-                    tool.toast(res.error_msg)
-                }
-             })
-
-          }
-      }
-
-  }
+    }
 </script>
 
 <style lang="css" scoped>

@@ -2,43 +2,42 @@
   <div class="detail">
     <div class="top-box">
       <header class="head-logo clearfix">
-          <i class="head-logo-menu iconfont icon-fenlei1"></i>
-          <i class="head-logo-icon iconfont icon-logo"></i>
+        <i class="head-logo-menu iconfont icon-fenlei1"></i>
+        <i class="head-logo-icon iconfont icon-logo"></i>
       </header>
     </div>
     <div class="loading-dox" v-show="loading">
-       <loading :size="50"></loading>
+      <loading :size="50"></loading>
     </div>
     <div class="detail-post" v-show="!loading">
       <div class="detail-post-meta">
-          <div class="detail-post-avatar">
-            <router-link :to="{name:'user',params:{loginname:detail.author.loginname}}"  v-if="detail.author">
-              <img class="detail-post-avatar-img" v-if="detail.author" :src="detail.author.avatar_url"/>
+        <div class="detail-post-avatar">
+          <router-link :to="{name:'user',params:{loginname:detail.author.loginname}}" v-if="detail.author">
+            <img class="detail-post-avatar-img" v-if="detail.author" :src="detail.author.avatar_url" />
+          </router-link>
+        </div>
+        <div class="detail-post-info">
+          <div class="detail-post-author-name">
+            <router-link :to="{name:'user',params:{loginname:detail.author.loginname}}" v-if="detail.author">
+              <p>{{ detail.author.loginname }}</p>
             </router-link>
+            <p class="detail-type-item">
+              <span class="detail-type-item-font" v-if="detail.tab === 'good'">#精华#</span>
+              <span class="detail-type-item-font" v-else-if="detail.tab === 'share'">#分享#</span>
+              <span class="detail-type-item-font" v-else-if="detail.tab === 'ask'">#问答#</span>
+              <span class="detail-type-item-font" v-else-if="detail.tab === 'job'">#招聘#</span>
+            </p>
           </div>
-          <div class="detail-post-info">
-              <div class="detail-post-author-name">
-                <router-link :to="{name:'user',params:{loginname:detail.author.loginname}}"  v-if="detail.author">
-                   <p>{{ detail.author.loginname }}</p>
-                </router-link>
-                <p class="detail-type-item">
-                  <span class="detail-type-item-font" v-if="detail.tab === 'good'">#精华#</span>
-                  <span class="detail-type-item-font" v-else-if="detail.tab === 'share'">#分享#</span>
-                  <span class="detail-type-item-font" v-else-if="detail.tab === 'ask'">#问答#</span>
-                  <span class="detail-type-item-font" v-else-if="detail.tab === 'job'">#招聘#</span>
-                </p>
-              </div>
-              <div class="detail-post-time">楼主 发表于{{detail.last_reply_at | formatDate}}</div>
-          </div>
-          <div class="detail-collect-item" id="" >收藏</div>
+          <div class="detail-post-time">楼主 发表于{{detail.last_reply_at | formatDate}}</div>
+        </div>
+        <div class="detail-collect-item" id="">收藏</div>
       </div>
 
       <div class="detail-post-header">
-          <div class="detail-post-title">
-            <span class="detail-posts-tag hot" v-if="detail.top === true">置顶</span>
-            <span class="detail-posts-tag " v-else-if="detail.good === true">置顶</span>
-            {{ detail.title }}
-          </div>
+        <div class="detail-post-title">
+          <span class="detail-posts-tag hot" v-if="detail.top === true">置顶</span>
+          <span class="detail-posts-tag " v-else-if="detail.good === true">置顶</span> {{ detail.title }}
+        </div>
       </div>
 
       <div class="detail-post-content">
@@ -48,20 +47,20 @@
       <div class="detail-post-comment">
         <h2 class="detail-post-comment-title">评论</h2>
         <div class="detail-post-comment-list">
-            <div class="detail-post-comment-item" v-if="detail.replies" v-for="(item,index) in detail.replies">
-              <div class="detail-post-comment-avatar">
-                <img class="detail-post-comment-avatar-img" :src="item.author.avatar_url" />
-              </div>
-              <div class="detail-post-comment-cell">
-                <div class="detail-post-comment-info">
-                  <div class="detail-post-comment-info-cell">
-                    <p class="detail-post-comment-author-name">{{item.author.loginname}}</p>
-                    <p class="detail-post-comment-time">{{index + 1}}楼 &bull; 发表于{{item.create_at | formatDate}}</p>
-                  </div>
-                  <div class="detail-post-comment-info-cell" style="text-align:right" >
-                    <img class="detail-post-zan" mode="scaleToFill"  src="../assets/icon/zan.png" />
+          <div class="detail-post-comment-item" v-if="detail.replies" v-for="(item,index) in detail.replies">
+            <div class="detail-post-comment-avatar">
+              <img class="detail-post-comment-avatar-img" :src="item.author.avatar_url" />
+            </div>
+            <div class="detail-post-comment-cell">
+              <div class="detail-post-comment-info">
+                <div class="detail-post-comment-info-cell">
+                  <p class="detail-post-comment-author-name">{{item.author.loginname}}</p>
+                  <p class="detail-post-comment-time">{{index + 1}}楼 &bull; 发表于{{item.create_at | formatDate}}</p>
+                </div>
+                <div class="detail-post-comment-info-cell" style="text-align:right" >
+                    <img class="detail-post-zan" mode="scaleToFill" src="../assets/icon/zan.png" />
                     <span class="detail-post-zan-num" v-if="item.zanNum > 0">{{item.zanNum}}</text>
-                  </div>
+                </div>
                 </div>
                 <div class="detail-comment-content">
                   <p class="detail-comment-text" v-html="item.content "></p>
@@ -82,33 +81,33 @@
 </template>
 
 <script>
-    import Loading from '../components/Loading.vue'
-    import { mapGetters } from 'vuex'
-    export default {
-      components:{
-        Loading
-      },
-      beforeRouteEnter(to, from, next) {
-        next((vm) => {
-          vm.detail = {}
-          vm.getDetailData(vm) 
-        })
-      },
-      mounted () {
-        //  this.getDetailData(this) 
-      },
-      computed:mapGetters({
-        detail:'getDetail',
-        loading:'loading'
-      }),
-      methods: {
-        getDetailData (el) {
-          window.scroll(0,0)
-          let id = el.$route.params.id
-          el.$store.dispatch('getDetail', id)
-        }
+  import Loading from '../components/Loading.vue'
+  import { mapGetters } from 'vuex'
+  export default {
+    components: {
+      Loading
+    },
+    beforeRouteEnter(to, from, next) {
+      next((vm) => {
+        vm.detail = {}
+        vm.getDetailData(vm)
+      })
+    },
+    mounted() {
+      //  this.getDetailData(this) 
+    },
+    computed: mapGetters({
+      detail: 'getDetail',
+      loading: 'loading'
+    }),
+    methods: {
+      getDetailData(el) {
+        window.scroll(0, 0)
+        let id = el.$route.params.id
+        el.$store.dispatch('getDetail', id)
       }
     }
+  }
 
 </script>
 

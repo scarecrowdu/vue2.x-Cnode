@@ -1,83 +1,83 @@
 <template>
-    <div class="user">
-        <div class="auserinfo">
-            <img class="auserinfo-avatar" :src="user.avatar_url">
-            <p class="auserinfo-nickname">{{user.loginname}}</p>
-            <div class="auserinfo-cell">
-               <p class="time">注册时间：{{user.create_at | formatDate}}</p>
-               <p class="score">积分:{{user.score}}</p>
-            </div>
-        </div>
-
-        <ul class="tab-nav">
-            <li :class="{on: tabIndex == 0}" @click="tabIndex = 0">回复</li>
-            <li :class="{on: tabIndex == 1}" @click="tabIndex = 1">主题</li>
-        </ul>
-        <div class="auser-artlist" v-show="tabIndex == 0">
-            <div class="artitem" v-for="(item,index) in user.recent_replies">
-               <div class="ai-userimg">
-                 <router-link :to="{name:'user',params:{loginname:item.author.loginname}}">
-                   <img :src="item.author.avatar_url">
-                 </router-link>
-               </div>
-               <div class="ai-message">
-                  <router-link :to="{name:'detail',params:{id:item.id}}">
-                    <p class="ai-mcell">
-                      <span>{{item.author.loginname}}</span><span>{{item.last_reply_at | formatDate}}</span>
-                    </p>
-                    <p class="ai-title nowrap-flex">
-                      {{item.title}}
-                    </p>
-                  </router-link>
-               </div>
-            </div>
-        </div>
-         <div class="auser-artlist" v-show="tabIndex == 1">
-            <div class="artitem" v-for="(item,index) in user.recent_topics">
-               <div class="ai-userimg">
-                 <router-link :to="{name:'user',params:{loginname:item.author.loginname}}">
-                   <img :src="item.author.avatar_url">
-                 </router-link>
-               </div>
-               <div class="ai-message">
-                  <router-link :to="{name:'detail',params:{id:item.id}}">
-                    <p class="ai-mcell">
-                      <span>{{item.author.loginname}}</span><span>{{item.last_reply_at | formatDate}}</span>
-                    </p>
-                    <p class="ai-title nowrap-flex">
-                      {{item.title}}
-                    </p>
-                  </router-link>
-               </div>
-            </div>
-            
-        </div>
+  <div class="user">
+    <div class="auserinfo">
+      <img class="auserinfo-avatar" :src="user.avatar_url">
+      <p class="auserinfo-nickname">{{user.loginname}}</p>
+      <div class="auserinfo-cell">
+        <p class="time">注册时间：{{user.create_at | formatDate}}</p>
+        <p class="score">积分:{{user.score}}</p>
+      </div>
     </div>
+
+    <ul class="tab-nav">
+      <li :class="{on: tabIndex == 0}" @click="tabIndex = 0">回复</li>
+      <li :class="{on: tabIndex == 1}" @click="tabIndex = 1">主题</li>
+    </ul>
+    <div class="auser-artlist" v-show="tabIndex == 0">
+      <div class="artitem" v-for="(item,index) in user.recent_replies">
+        <div class="ai-userimg">
+          <router-link :to="{name:'user',params:{loginname:item.author.loginname}}">
+            <img :src="item.author.avatar_url">
+          </router-link>
+        </div>
+        <div class="ai-message">
+          <router-link :to="{name:'detail',params:{id:item.id}}">
+            <p class="ai-mcell">
+              <span>{{item.author.loginname}}</span><span>{{item.last_reply_at | formatDate}}</span>
+            </p>
+            <p class="ai-title nowrap-flex">
+              {{item.title}}
+            </p>
+          </router-link>
+        </div>
+      </div>
+    </div>
+    <div class="auser-artlist" v-show="tabIndex == 1">
+      <div class="artitem" v-for="(item,index) in user.recent_topics">
+        <div class="ai-userimg">
+          <router-link :to="{name:'user',params:{loginname:item.author.loginname}}">
+            <img :src="item.author.avatar_url">
+          </router-link>
+        </div>
+        <div class="ai-message">
+          <router-link :to="{name:'detail',params:{id:item.id}}">
+            <p class="ai-mcell">
+              <span>{{item.author.loginname}}</span><span>{{item.last_reply_at | formatDate}}</span>
+            </p>
+            <p class="ai-title nowrap-flex">
+              {{item.title}}
+            </p>
+          </router-link>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </template>
 
 <script>
 
-   import { mapGetters } from "vuex"
-   export default {
-     data () {
-       return {
-         tabIndex: 0
-       }
-     },
-     computed:mapGetters({user:'getUserData'}),
-     beforeRouteEnter(to, from, next) {
-        next((vm) => {
-          vm.user = {}
-          vm.userData(vm) 
-        })
-      },
-     methods: {
-       userData (el) {
-         let name = el.$route.params.loginname
-         el.$store.dispatch('getUserData', name)
-       }
-     }
-   }
+  import { mapGetters } from "vuex"
+  export default {
+    data() {
+      return {
+        tabIndex: 0
+      }
+    },
+    computed: mapGetters({ user: 'getUserData' }),
+    beforeRouteEnter(to, from, next) {
+      next((vm) => {
+        vm.user = {}
+        vm.userData(vm)
+      })
+    },
+    methods: {
+      userData(el) {
+        let name = el.$route.params.loginname
+        el.$store.dispatch('getUserData', name)
+      }
+    }
+  }
 </script>
 
 <style lang="css" scoped>

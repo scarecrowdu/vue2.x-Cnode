@@ -1,11 +1,11 @@
 <template>
     <div class="meun">
-        <div class="slide"  :class="{'showMeun':show}">
-             <div class="mheader-logo clearfix">
+        <div class="slide" :class="{'showMeun':show}">
+            <div class="mheader-logo clearfix">
                 <img src="~assets/timg.jpg">
                 <h2>Vue2.x Cnode社区</h2>
-             </div>
-             <div class="mnav-box clearfix">
+            </div>
+            <div class="mnav-box clearfix">
                 <ul>
                     <li>
                         <router-link to="/" exact>
@@ -13,7 +13,7 @@
                             <span>首页</span>
                         </router-link>
                     </li>
-                    <li >
+                    <li>
                         <router-link to="/post">
                             <i class="iconfont icon-fabu"></i>
                             <span>发布</span>
@@ -31,44 +31,44 @@
                             <span>关于</span>
                         </router-link>
                     </li>
-                    <li  v-if="!loginStatus">
+                    <li v-if="!loginStatus">
                         <router-link to="/login">
                             <i class="iconfont icon-rightArrow"></i>
                             <span>登陆</span>
                         </router-link>
                     </li>
-                    <li  v-if="loginStatus" @click="singOut">
+                    <li v-if="loginStatus" @click="singOut">
                         <a>
                             <i class="iconfont icon-rightArrow"></i>
                             <span>退出</span>
                         </a>
                     </li>
                 </ul>
-             </div>
+            </div>
         </div>
-        <div class="mask" v-show="show"  @click="hideMenu"></div>
+        <div class="mask" v-show="show" @click="hideMenu"></div>
     </div>
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
-  export default {
-     props:['show'],
-     computed:mapState({ loginStatus: state => state.user.loginStatus }),
-     methods: {
-        ...mapActions({ setSignOut: 'setSignOut' }),
-        // 关闭左侧菜单栏
-        hideMenu () {
-          this.$emit("hideMenuSlide")
-        },
-        // 退出登录
-        singOut () {
-            this.$emit("hideMenuSlide")
-            this.setSignOut()
-            this.$router.push({ name: 'home' })
+    import { mapState, mapActions } from 'vuex'
+    export default {
+        props: ['show'],
+        computed: mapState({ loginStatus: state => state.user.loginStatus }),
+        methods: {
+            ...mapActions({ setSignOut: 'setSignOut' }),
+            // 关闭左侧菜单栏
+            hideMenu() {
+                this.$emit("hideMenuSlide")
+            },
+            // 退出登录
+            singOut() {
+                this.$emit("hideMenuSlide")
+                this.setSignOut()
+                this.$router.push({ name: 'home' })
+            }
         }
-     }
-  }
+    }
 </script>
 
 <style lang="scss" scoped>

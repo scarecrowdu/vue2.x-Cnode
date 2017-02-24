@@ -1,49 +1,49 @@
 <template>
-    <div class="page login">
-        <div class="login-item">
-            <img class="login-item-img" src="https://o4j806krb.qnssl.com/public/images/cnodejs_light.svg" >
-            <div class="login-item-section">
-                <input placeholder="请输入Token" class="login-item-input" type="text" v-model="accesstoken" />
-            </div>
-            <div class="login-item-button">
-                <button class="login-button" @click="isLogin"> 登录 </button>
-            </div>
-        </div>
+  <div class="page login">
+    <div class="login-item">
+      <img class="login-item-img" src="https://o4j806krb.qnssl.com/public/images/cnodejs_light.svg">
+      <div class="login-item-section">
+        <input placeholder="请输入Token" class="login-item-input" type="text" v-model="accesstoken" />
+      </div>
+      <div class="login-item-button">
+        <button class="login-button" @click="isLogin"> 登录 </button>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-   import { mapActions } from 'vuex'
-   import api from '../fetch/api'
-   import tool from '../util/tool'
-   export default {
-     data () {
-       return {
-         accesstoken:''
-       }
-     },
-     methods: {
-       ...mapActions({ setUserInfo: 'setUserInfo' }),
-       // 用户登录  
-       isLogin () {
-         if (!this.accesstoken) {
-            return tool.toast('Token不能为空')
-         }
-         api.Login(this.accesstoken)
-         .then(res => {
-            if(res.success){
-               let userInfo = Object.assign({accesstoken:this.accesstoken}, res)
-               this.setUserInfo(userInfo)
-               this.$router.go(-1)
+  import { mapActions } from 'vuex'
+  import api from '../fetch/api'
+  import tool from '../util/tool'
+  export default {
+    data() {
+      return {
+        accesstoken: ''
+      }
+    },
+    methods: {
+      ...mapActions({ setUserInfo: 'setUserInfo' }),
+      // 用户登录  
+      isLogin() {
+        if (!this.accesstoken) {
+          return tool.toast('Token不能为空')
+        }
+        api.Login(this.accesstoken)
+          .then(res => {
+            if (res.success) {
+              let userInfo = Object.assign({ accesstoken: this.accesstoken }, res)
+              this.setUserInfo(userInfo)
+              this.$router.go(-1)
             }
-         })
-         .catch(error => {
+          })
+          .catch(error => {
             console.log(error)
-         })
-         
-       }
-     }
-   }
+          })
+
+      }
+    }
+  }
 
 </script>
 

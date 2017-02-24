@@ -12,14 +12,14 @@ const actions = {
      * @param {any} {commit}
      * @param {any} accesstoken
      */
-    getMessageInfo ({commit,rootState}) {
-       commit(types.COM_LOADING_STATUS,true)
-       let accesstoken = rootState.user.userInfo.accesstoken
-       api.Messages(accesstoken)
-       .then(res =>{
-          commit(types.GET_MESSAGE_LIST,res.data)
-          commit(types.COM_LOADING_STATUS,true)
-       })
+    getMessageInfo({ commit, rootState }) {
+        commit(types.COM_LOADING_STATUS, true)
+        let accesstoken = rootState.user.userInfo.accesstoken
+        api.Messages(accesstoken)
+            .then(res => {
+                commit(types.GET_MESSAGE_LIST, res.data)
+                commit(types.COM_LOADING_STATUS, true)
+            })
     }
 }
 
@@ -28,9 +28,9 @@ const getters = {
 }
 
 const mutations = {
-   [types.GET_MESSAGE_LIST] (state,res) {
-       state.post = res
-   }
+    [types.GET_MESSAGE_LIST](state, res) {
+        state.post = res
+    }
 }
 
 export default {

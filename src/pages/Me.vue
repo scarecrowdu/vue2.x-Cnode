@@ -6,31 +6,31 @@
             <p class="auserinfo-nickname">{{userInfo.loginname}}</p>
         </div>
         <div class="me-item">
-             <mt-cell title="我的消息" is-link :to="{ name: 'message' }">
+            <mt-cell title="我的消息" is-link :to="{ name: 'message' }">
                 <i slot="icon" class="iconfont icon-xiaoxi"></i>
-             </mt-cell>
-             <mt-cell title="发布主题" is-link :to="{ name: 'post' }">
+            </mt-cell>
+            <mt-cell title="发布主题" is-link :to="{ name: 'post' }">
                 <i slot="icon" class="iconfont icon-fabu"></i>
-             </mt-cell>
+            </mt-cell>
 
-              <mt-cell title="关于" is-link :to="{ name: 'about' }">
+            <mt-cell title="关于" is-link :to="{ name: 'about' }">
                 <i slot="icon" class="iconfont icon-about2"></i>
-             </mt-cell>
+            </mt-cell>
         </div>
     </div>
 </template>
 
 <script>
-   import MtCell from '../components/cell.vue'
-   import { mapState } from 'vuex'
-   export default {
-       components: {
-           MtCell
-       },
-       computed: mapState({
-          userInfo:state => state.user.userInfo 
-       })
-   }
+    import MtCell from '../components/cell.vue'
+    import { mapState } from 'vuex'
+    export default {
+        components: {
+            MtCell
+        },
+        computed: mapState({
+            userInfo: state => state.user.userInfo
+        })
+    }
 </script>
 
 <style lang="css" scoped>
