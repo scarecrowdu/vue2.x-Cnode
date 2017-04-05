@@ -59,7 +59,7 @@
                 </div>
                 <div class="detail-post-comment-info-cell" style="text-align:right" >
                     <img class="detail-post-zan" mode="scaleToFill" src="../assets/icon/zan.png" />
-                    <span class="detail-post-zan-num" v-if="item.zanNum > 0">{{item.zanNum}}</text>
+                    <span class="detail-post-zan-num" v-if="item.zanNum > 0">{{item.zanNum}}</span>
                 </div>
                 </div>
                 <div class="detail-comment-content">
