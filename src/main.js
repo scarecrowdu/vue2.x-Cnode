@@ -1,5 +1,6 @@
 import './assets/css/reset.css'
 import './assets/css/common.css'
+import 'github-markdown-css'; //markdown css
 
 import Vue from 'vue'
 import App from './App'

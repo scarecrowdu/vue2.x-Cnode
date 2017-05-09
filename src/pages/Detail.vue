@@ -41,7 +41,7 @@
       </div>
 
       <div class="detail-post-content">
-        <div class="content-info" v-html="detail.content"></div>
+        <div class="content-info markdown-body" v-html="detail.content"></div>
       </div>
 
       <div class="detail-post-comment">
