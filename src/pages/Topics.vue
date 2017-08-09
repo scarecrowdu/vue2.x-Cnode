@@ -4,19 +4,19 @@
 
     <nav class="nav-box clearfix">
       <ul class="nav-bar">
-        <li v-for="(item, index) in itemTab" class="nav-bar-item" :class="{'nav-bar-active':initIndex === index}" v-on:click="changeTab(index)">{{item.title}}</li>
+        <li v-for="(item, index) in itemTab" class="nav-bar-item" :class="{'nav-bar-active':initIndex === index}" v-on:click="changeTab(index)" :key="index">{{item.title}}</li>
       </ul>
     </nav>
 
-    <section class="scroll-posts-list" v-if="topicsList">
-      <div class="posts-list" v-for="(item,index) in topicsList">
-        <router-link :to="{name:'detail',params:{id:item.id}}">
+    <section class="scroll-posts-list" v-if="getTopicsList">
+      <div class="posts-list" v-for="(item,index) in getTopicsList" :key="index">
+         <router-link :to="{name:'detail',params:{id:item.id}}"> 
           <div class="posts-list-info clearfix">
             <img class="userimg" :src="item.author.avatar_url" />
             <div class="item-box">
               <div class="userinfo">
                 <span class="username">{{item.author.loginname}}</span>
-                <span class="time">{{item.last_reply_at | formatDate}}</span>
+                 <span class="time">{{item.last_reply_at | formatDate}}</span> 
               </div>
               <div class="posts-title">
                 <div class="posts-tag hot" v-if="item.top === true">置顶</div>
@@ -42,7 +42,7 @@
               <p class="bar-info-item-number" v-else-if="item.tab === 'job'">招聘</p>
             </div>
           </div>
-        </router-link>
+         </router-link> 
       </div>
     </section>
     <div class="loading-box" v-show="loading">
@@ -52,10 +52,11 @@
 </template>
 
 <script>
-  import Loading from '../components/Loading.vue'
-  import Cheader from '../components/Cheader.vue'
-  import { mapGetters, mapState } from 'vuex'
-  export default {
+import Loading from '../components/Loading.vue'
+import Cheader from '../components/Cheader.vue'
+import { mapGetters, mapState } from 'vuex'
+
+export default {
     components: {
       Cheader,
       Loading
@@ -69,42 +70,39 @@
       window.removeEventListener("scroll", this.scrollArtlist, false)
       next()
     },
-    created() {
-      if (this.topicsList.length == 0) {
-        this.$store.dispatch('getTopicsList')
-      }
-    },
-    // mounted () {
-    //   window.addEventListener('scroll', this.scrollArtlist, false)
-    // },
-    computed: {
-      ...mapGetters({
-        topicsList: 'getTopicsList',
-        loading: 'loading'
-      }),
-      ...mapState({
-        initIndex: state => state.com.initIndex,
-        itemTab: state => state.com.itemTab,
-      })
-    },
-    methods: {
+  created () {
+    if (this.getTopicsList.length === 0) {
+      this.$store.dispatch('getTopicsList')
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'getTopicsList',   
+      'loading'
+    ]),
+    ...mapState({
+      initIndex: state => state.com.initIndex,
+      itemTab: state => state.com.itemTab
+    })
+  },
+  methods: {
       // 标签tab切换方法
-      changeTab(index) {
-        window.scroll(0, 0)
-        this.topicsList = []
-        this.$store.commit('COM_INIT_INDEX', index)
-        this.$store.commit('GET_SEARCH_KEY', { page: 0, tab: this.itemTab[index].type })
+    changeTab(index) {
+      window.scroll(0, 0)
+      this.topicsList = []
+      this.$store.commit('COM_INIT_INDEX', index)
+      this.$store.commit('GET_SEARCH_KEY', { page: 0, tab: this.itemTab[index].type })
+      this.$store.dispatch('getTopicsList')
+    },
+    // 超过滚动获取数据方法
+    scrollArtlist() {
+      let totalheight = parseFloat(window.innerHeight) + parseFloat(window.scrollY)
+      if (document.body.clientHeight <= totalheight + 200) {
         this.$store.dispatch('getTopicsList')
-      },
-      // 超过滚动获取数据方法
-      scrollArtlist() {
-        let totalheight = parseFloat(window.innerHeight) + parseFloat(window.scrollY);
-        if (document.body.clientHeight <= totalheight + 200) {
-          this.$store.dispatch('getTopicsList')
-        }
       }
     }
   }
+}
 </script>
 
 
@@ -163,7 +161,7 @@
   overflow: hidden;
   display: flex;
   margin-top: 15px;
-  // padding-bottom: 10px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
 .posts-list-info .userimg{
@@ -204,7 +202,7 @@
   width: 36px;
   height:18px;
   text-align: center;
-  // line-height:18px;
+  line-height:18px; 
   margin-right: 5px;
   font-size: 12px;
   color: #80bd01;
